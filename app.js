@@ -48,7 +48,6 @@ app.post('/run', async (_req, res) => {
 app.post('/delta', bodyParser.json(), async (req, res) => {
   res.status(202).send();
   for (let [type, graphs] of Object.entries(CONFIG)) {
-    console.log(JSON.stringify(req.body))
     const insertedSubjects = filterDeltaForInsertedType(req.body, type);
     if (insertedSubjects.length > 0) {
       console.log(`Received ${insertedSubjects.length} object inserts of type ${type} through deltas. Handling now.`);
