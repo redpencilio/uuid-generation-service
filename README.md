@@ -4,20 +4,25 @@ Data used within a [semantic.works](http://semantic.works)-stack (and [mu-cl-res
 
 ## Configuration
 
-### Environment variables
+### config.json
 
-The service can be configured through the following environment variables:
-* `GRAPH`: graph to write to.
-* `RDF_TYPE`: rdf type of the objects to watch for missing `mu:uuid`.
+The service can be configured through a configuration file `config.json`. If you use the docker-compose config below, this file should be in `config/uuid-generation/`. This file consists of one object with the accepted types as keys and a list of all the graphs those types should be checked in. For example:
+
+``` json
+{
+    "http://data.vlaanderen.be/ns/besluit#Agendapunt": ["http://mu.semte.ch/graphs/public"],
+    "http://data.vlaanderen.be/ns/besluit#Zitting": ["http://mu.semte.ch/graphs/public"],
+    "http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#Email": ["http://mu.semte.ch/graphs/public", "http://mu.semte.ch/graphs/emails"]
+}
+```
 
 ### docker-compose snippet
 
 ```yaml
 uuid-generation:
   build: https://github.com/kanselarij-vlaanderen/uuid-generation-service.git
-  environment:
-    RDF_TYPE: "http://data.europa.eu/eli/ontology#LegalResource"
-    GRAPH: "http://mu.semte.ch/graphs/staatsblad"
+  volumes:
+    - ./config/uuid-generation/:/config
 ```
 
 ### delta-notifier configuration
@@ -50,8 +55,8 @@ uuid-generation:
 
 ### POST /delta
 
-Internal endpoint which receives [delta's](https://github.com/mu-semtech/delta-notifier).
+Internal endpoint which receives [deltas](https://github.com/mu-semtech/delta-notifier).
 
 ### POST /run
 
-Service-endpoint to manually trigger running uuid-insertion for the configured type.
+Service-endpoint to manually trigger running uuid-insertion for the configured types.
