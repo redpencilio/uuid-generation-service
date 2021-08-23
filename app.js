@@ -5,9 +5,6 @@ import { filterDeltaForInsertedType } from './lib/delta';
 import selectSubjectsWithoutUuid from './queries/select-without-uuid';
 import insertUuid from './queries/insert-uuid';
 
-
-app.use(json());
-
 const CONFIG = readConfig();
 
 function readConfig() {
