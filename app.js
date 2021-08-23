@@ -1,6 +1,5 @@
 import fs from 'fs';
 import bodyParser from 'body-parser';
-import json from 'express';
 import { app, errorHandler } from 'mu';
 import { filterDeltaForInsertedType } from './lib/delta';
 import selectSubjectsWithoutUuid from './queries/select-without-uuid';
@@ -41,7 +40,9 @@ app.post('/run', async (_req, res) => {
   })
 
   return res.status(200).send(JSON.stringify(
-    ret
+    {
+      "data": ret
+    }
   ));
 });
 
