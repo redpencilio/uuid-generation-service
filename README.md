@@ -4,6 +4,13 @@ Data used within a [semantic.works](http://semantic.works)-stack (and [mu-cl-res
 
 ## Configuration
 
+### service options
+```
+  RUN_CRON_JOBS: set to "true" if cron jobs should be enabled (default: false)
+  CRON_FREQUENCY: default "* */1 * * *"
+  QUEUE_POLL_INTERVAL: tick interval of the processing-queue in ms (default: 60000)
+```
+
 ### config.json
 
 The service can be configured through a configuration file `config.json`. If you use the docker-compose config below, this file should be in `config/uuid-generation/`. This file consists of one object with the accepted types as keys and a list of all the graphs those types should be checked in. For example:
