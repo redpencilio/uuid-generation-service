@@ -72,7 +72,7 @@ app.post('/delta', bodyParser.json(), async (req, res) => {
 
   });
 
-  return  res.status(202).send();
+  return res.status(202).send();
 
 });
 
