@@ -4,6 +4,8 @@ import { app, errorHandler } from 'mu';
 import { filterDeltaForInsertedType } from './lib/delta';
 import selectSubjectsWithoutUuid from './queries/select-without-uuid';
 import insertUuid from './queries/insert-uuid';
+import { CronJob } from 'cron';
+import fetch from 'node-fetch';
 
 const CONFIG = readConfig();
 
@@ -12,6 +14,14 @@ function readConfig() {
   const config = JSON.parse(configText);
 
   return config;
+}
+
+
+if(RUN_CRON_JOBS) {
+  new CronJob(CRON_FREQUENCY, function() {
+    console.log(`uuid-generation cron job started at ${new Date().toISOString()}`);
+    fetch('http://localhost/run', { method: 'POST' } );
+  }, null, true);
 }
 
 app.post('/run', async (_req, res) => {
