@@ -27,7 +27,7 @@ The service can be configured through a configuration file `config.json`. If you
 
 ```yaml
 uuid-generation:
-  build: https://github.com/kanselarij-vlaanderen/uuid-generation-service.git
+  image: redpencil/uuid-generation
   volumes:
     - ./config/uuid-generation/:/config
 ```
