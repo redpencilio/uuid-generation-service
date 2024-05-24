@@ -47,7 +47,7 @@ app.post('/run', async (_req, res) => {
       }
     }
 
-    console.info(`Finished adding uuid's to the following uris: ${uris.join('\n')}`);
+    console.info(`Finished adding uuid's to the following uris: ${[...uris].join('\n')}`);
   });
 
   return res
