@@ -55,7 +55,10 @@ app.post('/run', async (_req, res) => {
     .send(JSON.stringify({"message": "Scheduled uuid-generation-job"}));
 });
 
-app.post('/delta', bodyParser.json(), async (req, res) => {
+app.post('/delta', bodyParser.json({
+  type: function(req) { return /^application\/json/.test(req.get('content-type')); },
+  limit: '50mb'
+}), async (req, res) => {
 
 
   processingQueue.addJob(async () => {
