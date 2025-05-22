@@ -1,6 +1,6 @@
 {
   "name": "uuid-generation-service",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Microservice that generates mu:uuid for resources that don't have one",
   "main": "app.js",
   "scripts": {
