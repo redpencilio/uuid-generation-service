@@ -1,5 +1,4 @@
-import { updateSudo } from '@lblod/mu-auth-sudo';
-import { sparqlEscapeString, sparqlEscapeUri, uuid as generateUuid } from 'mu';
+import { sparqlEscapeString, sparqlEscapeUri, uuid as generateUuid, update } from 'mu';
 
 function insertUuid (subject, graphs) {
   const uuid = generateUuid();
@@ -22,7 +21,7 @@ WHERE {
     }
 }
 `;
-  return updateSudo(queryString);
+  return update(queryString, { sudo: true });
 }
 
 export default insertUuid;

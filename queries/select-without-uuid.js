@@ -1,9 +1,8 @@
-import { querySudo } from '@lblod/mu-auth-sudo';
-import { sparqlEscapeUri } from 'mu';
+import { sparqlEscapeUri, query } from 'mu';
 import { parseSparqlResults } from './util';
 
 async function selectSubjectsWithoutUuid (type, graphs) {
-  const countQueryResult = await querySudo(`PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+  const countQueryResult = await query(`PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
 
 SELECT (COUNT(?s) as ?count)
 WHERE {
@@ -17,7 +16,7 @@ WHERE {
         ${graphs.map(sparqlEscapeUri).join('\n        ')}
     }
 }
-`);
+`, { sudo: true });
 
   const count = parseInt(countQueryResult.results.bindings[0].count.value);
 
@@ -39,7 +38,7 @@ WHERE {
     }
 } ORDER BY ?s LIMIT ${batchSize} OFFSET ${i*batchSize}
 `;
-    const res = await querySudo(queryString);
+    const res = await query(queryString, { sudo: true });
     const parsedRes = parseSparqlResults(res);
     parsedRes.forEach(res => subjects.add(res.s));
   }

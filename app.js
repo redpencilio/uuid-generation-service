@@ -6,7 +6,6 @@ import selectSubjectsWithoutUuid from './queries/select-without-uuid';
 import insertUuid from './queries/insert-uuid';
 import { ProcessingQueue } from './lib/processing-queue';
 import { CronJob } from 'cron';
-import fetch from 'node-fetch';
 
 const CONFIG = readConfig();
 const RUN_CRON_JOBS = process.env.RUN_CRON_JOBS == 'true' || false;
