@@ -10,6 +10,8 @@ uuid-generation:
   image: redpencil/uuid-generation
   volumes:
     - ./config/uuid-generation/:/config
+  environment:
+    ALLOW_MU_AUTH_SUDO: "true"
 ```
 
 Create a file `config.json` in `./config/uuid-generation` and list the resource type/graph combinations for which a UUID must be generated.
